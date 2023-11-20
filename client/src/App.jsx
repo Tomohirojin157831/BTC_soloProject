@@ -9,15 +9,14 @@ function App() {
 
   useEffect(() => {
     Axios.get("http://localhost:4242/users")
-      // .then((response) => response.json())
-      .then((users) => setUsers(users.data));
+      .then((users) => {
+        console.log("⭐️",users)
+        setUsers(users.data)});
     }, []);
     
-    console.log("⭐️",users.data)
   return (
     <>
       <Start users={users}>
-      <div>{users}</div>
       </Start>
     </>
   );
