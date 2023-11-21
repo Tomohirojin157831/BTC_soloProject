@@ -8,7 +8,7 @@ exports.seed = function (knex, Promise) {
       last_name: "Jin",
       age: "72",
       country: "Japan",
-      favorite_car: "Toyota",
+      favorite_car: "mclaren",
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ exports.seed = function (knex, Promise) {
       last_name: "Wang",
       age: "18",
       country: "China",
-      favorite_car: "BMW",
+      favorite_car: "bmw",
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ exports.seed = function (knex, Promise) {
       last_name: "Schwarzenegger",
       age: "76",
       country: "USA",
-      favorite_car: "HUMMER",
+      favorite_car: "porsche",
     },
   ];
   return knex("game")
