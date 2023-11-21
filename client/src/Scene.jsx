@@ -7,6 +7,7 @@ import { Suspense, useState } from "react";
 import { Track } from "./Track";
 import { Ground } from "./Ground";
 import { Car } from "./Car";
+import "./App.css";
 
 export function Scene(props) {
   const [thirdPerson, setThirdPerson] = useState(true);

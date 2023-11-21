@@ -3,15 +3,16 @@ import Select from "react-select";
 import * as THREE from "three";
 import { ConvexObjectBreaker, GLTFLoader } from "three/examples/jsm/Addons.js";
 import { OrbitControls } from "./orbitControl.js";
-import "./index.css";
+import "./App.css";
 
 // import { useState, useEffect } from "react";
 
+let chosenCar;
 export default function Start(props) {
   // const data = props;
   // const setStatus = props;
-  let chosenCar;
-  console.log("子供Start-props", props);
+  const [status2, setStatus2] = useState("choosing");
+
   let usersArray = [];
   let characterLists = [];
   if (props.users) {
@@ -24,16 +25,27 @@ export default function Start(props) {
       selectData.car = user.favorite_car;
       characterLists.push(selectData);
     });
-    // console.log("🚀🚀🚀🚀", characterLists);
   }
-
   //キャラの名前を選択した際の画像を表示する設定
   const handleChange = (e) => {
     let car = "./" + e.car + "/scene.gltf";
     chosenCar = e.car; //ゲームに向けて車を渡す
+    console.log(
+      "🚀 ~ file: Start.jsx:33 ~ handleChange ~ chosenCar:",
+      chosenCar
+    );
+    setStatus2("choseCar");
+
     //3Dモデル設定開始↓
     let canvas;
     let model;
+    let scale = 0.9;
+    let direction = -Math.PI / 1.2;
+
+    if (e.car === "mclaren") {
+      scale = 1.1;
+      direction = Math.PI / 6;
+    }
 
     canvas = document.getElementById("canvas");
 
@@ -43,7 +55,8 @@ export default function Start(props) {
     };
     //シーン
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xdddddd);
+    //背景画像と被るので一旦、下はコメントアウト
+    // scene.background = new THREE.Color(0xdddddd);
 
     //カメラ
     const camera = new THREE.PerspectiveCamera(
@@ -77,8 +90,8 @@ export default function Start(props) {
     //
     gltfLoader.load(car, (gltf) => {
       model = gltf.scene;
-      model.scale.set(1.2, 1.2, 1.2);
-      model.rotation.y = -Math.PI / 1.2; //tomohiro:4,arnold/hui:1.2向いている方向を決めれる
+      model.scale.set(scale, scale, scale);
+      model.rotation.y = direction; //tomohiro:4,arnold/hui:1.2向いている方向を決めれる
       scene.add(model);
 
       // mixer = new THREE.AnimationMixer(model);
@@ -133,6 +146,7 @@ export default function Start(props) {
     console.log("クリックした！");
     props.setStatus("gameStart");
     props.setCar(chosenCar);
+    console.log("🚀 ~ file: Start.jsx:145 ~ gameStart ~ chosenCar:", chosenCar);
   }
   //
   return (
@@ -141,17 +155,20 @@ export default function Start(props) {
         <h1>Car race game</h1>
         <Select
           className="select"
+          placeholder="select your name"
           options={characterLists}
           onChange={handleChange}
         />
-        <button
-          id="startButton"
-          onClick={() => {
-            gameStart();
-          }}
-        >
-          ゲームスタート
-        </button>
+        {status2 === "choseCar" && (
+          <button
+            id="startButton"
+            onClick={() => {
+              gameStart();
+            }}
+          >
+            start
+          </button>
+        )}
         <canvas id="canvas"></canvas>
       </div>
     </>

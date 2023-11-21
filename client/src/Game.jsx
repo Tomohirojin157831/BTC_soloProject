@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber"; //Three.jsに近いもの
 import { Scene } from "./Scene";
 import { Physics } from "@react-three/cannon"; //2D/3D物理エンジンの一つ
-import "./index.css";
+import "./App.css";
 
 export default function Start(props) {
   const [car2, setCar2] = useState("");
@@ -14,7 +14,7 @@ export default function Start(props) {
   return (
     <>
       <div className="game">
-        選択した車：{props.car}
+        selected car:{props.car}
         <button
           id="backButton"
           onClick={() => {
@@ -23,6 +23,7 @@ export default function Start(props) {
         >
           車選択に戻る
         </button>
+        <p>↑:front,↓:back,←:left,→:right,R:reset</p>
         <Canvas style={{ height: "900px" }}>
           <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
             <Scene car2={props.car} setCar2={setCar2}></Scene>
