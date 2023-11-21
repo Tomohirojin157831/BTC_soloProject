@@ -8,13 +8,15 @@ import "./index.css";
 // import { useState, useEffect } from "react";
 
 export default function Start(props) {
-  const data = props;
-  // console.log("子供Start", data.users);
+  // const data = props;
+  // const setStatus = props;
+  let chosenCar;
+  console.log("子供Start-props", props);
   let usersArray = [];
   let characterLists = [];
-  if (data.users) {
+  if (props.users) {
     // console.log("usersArrayデータあり");
-    usersArray = data.users;
+    usersArray = props.users;
     usersArray.map((user) => {
       let selectData = {};
       selectData.value = user.first_name;
@@ -28,6 +30,7 @@ export default function Start(props) {
   //キャラの名前を選択した際の画像を表示する設定
   const handleChange = (e) => {
     let car = "./" + e.car + "/scene.gltf";
+    chosenCar = e.car; //ゲームに向けて車を渡す
     //3Dモデル設定開始↓
     let canvas;
     let model;
@@ -67,7 +70,7 @@ export default function Start(props) {
     controls.dampingFactor = 0.2;
 
     //3Dモデルのインポート
-    let mixer; //動きを設定するための変数
+    // let mixer; //動きがあれば、設定するための変数
 
     const gltfLoader = new GLTFLoader();
 
@@ -78,13 +81,13 @@ export default function Start(props) {
       model.rotation.y = -Math.PI / 1.2; //tomohiro:4,arnold/hui:1.2向いている方向を決めれる
       scene.add(model);
 
-      mixer = new THREE.AnimationMixer(model);
-      const clips = gltf.animations;
-      //foreachで１つずつのアニメーションを取り出し、再生する。
-      clips.forEach(function (clip) {
-        const action = mixer.clipAction(clip);
-        action.play();
-      });
+      // mixer = new THREE.AnimationMixer(model);
+      // const clips = gltf.animations;
+      // //foreachで１つずつのアニメーションを取り出し、再生する。
+      // clips.forEach(function (clip) {
+      //   const action = mixer.clipAction(clip);
+      //   action.play();
+      // });
     });
 
     //ライト
@@ -126,6 +129,11 @@ export default function Start(props) {
     tick();
   };
 
+  function gameStart() {
+    console.log("クリックした！");
+    props.setStatus("gameStart");
+    props.setCar(chosenCar);
+  }
   //
   return (
     <>
@@ -136,6 +144,14 @@ export default function Start(props) {
           options={characterLists}
           onChange={handleChange}
         />
+        <button
+          id="startButton"
+          onClick={() => {
+            gameStart();
+          }}
+        >
+          ゲームスタート
+        </button>
         <canvas id="canvas"></canvas>
       </div>
     </>
