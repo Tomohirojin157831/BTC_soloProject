@@ -21,8 +21,8 @@ export function Track() {
   //   console.log("🚀 ~ file: Track.jsx:20 ~ Track ~ geometry:", geometry);
 
   return (
-    <mesh>
-      <primitive object={geometry} attach={"geometry"} />
+    <mesh geometry={geometry}>
+      {/* <primitive object={geometry} attach={"geometry"} /> */}
       <meshBasicMaterial toneMapped={false} map={colorMap} />
     </mesh>
   );

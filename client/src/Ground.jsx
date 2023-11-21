@@ -1,3 +1,4 @@
+import { usePlane } from "@react-three/cannon";
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
@@ -5,6 +6,15 @@ import { BufferAttribute } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 export function Ground() {
+  const [ref] = usePlane(
+    //useplane:物理シミュレーションにおける床や地面を表す平面を作成するための機能です。
+    () => ({
+      type: "Static",
+      rotation: [-Math.PI / 2, 0, 0],
+    }),
+    useRef(null)
+  );
+
   const grid = "/textures/grid.png";
   const groundao = "/textures/ground-ao.png";
   const alphamap = "/textures/alpha-map.png";
