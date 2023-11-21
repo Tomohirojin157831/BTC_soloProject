@@ -70,6 +70,17 @@ export const useControls = (vehicleApi, chassisApi) => {
         vehicleApi.setSteeringValue(0, i);
       }
     }
+    // if (controls.s) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, +1]);
+    // if (controls.w) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, -1]);
+    // if (controls.a) chassisApi.applyLocalImpulse([0, -5, 0], [-0.5, 0, 0]);
+    // if (controls.d) chassisApi.applyLocalImpulse([0, -5, 0], [+0.5, 0, +1]);
+
+    if (controls.r) {
+      chassisApi.position.set(-1.5, 0.5, 3);
+      chassisApi.velocity.set(0, 0, 0); //速度リセット
+      chassisApi.angularVelocity.set(0, 0, 0); //回転速度リセット
+      chassisApi.rotation.set(0, 0, 0); //回転リセット
+    }
   }, [controls, vehicleApi, chassisApi]);
 
   return controls;

@@ -1,4 +1,4 @@
-const debug = false;
+const debug = false; //trueにしておけば、開発用のタイヤが映る
 
 export const WheelDebug = ({ radius, wheelRef }) => {
   return (

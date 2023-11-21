@@ -5,6 +5,7 @@ import { Physics } from "@react-three/cannon"; //2D/3D物理エンジンの一�
 import "./index.css";
 
 export default function Start(props) {
+  const [car2, setCar2] = useState("");
   function gameBack() {
     console.log("クリックした！");
     props.setStatus("choosing");
@@ -24,7 +25,7 @@ export default function Start(props) {
         </button>
         <Canvas style={{ height: "900px" }}>
           <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
-            <Scene></Scene>
+            <Scene car2={props.car} setCar2={setCar2}></Scene>
           </Physics>
         </Canvas>
       </div>
