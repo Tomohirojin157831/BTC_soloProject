@@ -34,6 +34,7 @@ export default function App() {
             status={status}
             car={car}
             setCar={setCar}
+            className="game"
           ></Game>
         )}
       </div>
