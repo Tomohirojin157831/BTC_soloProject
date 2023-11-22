@@ -23,10 +23,10 @@ export default function Start(props) {
         >
           車選択に戻る
         </button>
-        <p>↑:front,↓:back,←:left,→:right,R:reset</p>
-        <canvas id="recog_canvas" width="480" height="460"></canvas>
-        <video id="recog_video" width="480" height="460"></video>
-        <Canvas style={{ height: "900px" }}>
+        <canvas id="recog_canvas" width="240" height="120"></canvas>
+        <video id="recog_video" width="240" height="120"></video>
+        <img src="./textures/manual.png" width="240" height="120" />
+        <Canvas style={{ height: "500px" }}>
           <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
             <Scene car2={props.car} setCar2={setCar2}></Scene>
           </Physics>
