@@ -24,6 +24,8 @@ export default function Start(props) {
           車選択に戻る
         </button>
         <p>↑:front,↓:back,←:left,→:right,R:reset</p>
+        <canvas id="recog_canvas" width="480" height="460"></canvas>
+        <video id="recog_video" width="480" height="460"></video>
         <Canvas style={{ height: "900px" }}>
           <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
             <Scene car2={props.car} setCar2={setCar2}></Scene>
